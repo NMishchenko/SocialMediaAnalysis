@@ -1,0 +1,2 @@
+We can add here possible converters that can be used in external API responses.
+For example, date or guid converters.
