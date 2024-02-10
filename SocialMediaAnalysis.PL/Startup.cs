@@ -44,12 +44,8 @@ public class Startup
     public void Configure(WebApplication app, IWebHostEnvironment env)
     {
         app.UseCors(FrontOriginPolicyName);
-        
-        if (env.IsDevelopment())
-        {
-            app.UseSwagger();
-            app.UseSwaggerUI();
-        }
+        app.UseSwagger();
+        app.UseSwaggerUI();
 
         app.UseMiddleware<ExceptionHandlerMiddleware>();
 
