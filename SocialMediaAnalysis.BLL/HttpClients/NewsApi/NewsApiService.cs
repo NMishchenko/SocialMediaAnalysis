@@ -1,5 +1,6 @@
 ﻿using SocialMediaAnalysis.BLL.HttpClients.NewsApi.Interfaces;
 using SocialMediaAnalysis.BLL.HttpClients.NewsApi.Models.NewsApi;
+using SocialMediaAnalysis.BLL.Models.Analysis;
 using SocialMediaAnalysis.BLL.Utility;
 
 namespace SocialMediaAnalysis.BLL.HttpClients.NewsApi;
@@ -19,6 +20,17 @@ public class NewsApiService: INewsApiService
     {
         var queryString = GetEverythingQueryString(request);
         var response = await MakeGetRequest<ApiResponseModel>("everything", queryString);
+        
+        response.ChartData = response.Articles
+            .Where(r => r.PublishedAt is { Year: > 2000 })
+            .GroupBy(r => r.PublishedAt.Value.Date)
+            .Select(g => new ChartDataModel()
+            {
+                Date = g.Key,
+                TotalNumber = g.Count()
+            })
+            .OrderBy(c => c.Date);
+        
         return response;
     }
     
