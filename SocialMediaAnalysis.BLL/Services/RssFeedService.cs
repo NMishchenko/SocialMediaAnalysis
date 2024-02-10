@@ -3,10 +3,11 @@ using System.Text;
 using System.Xml;
 using SocialMediaAnalysis.BLL.HttpClients.NewsApi.Interfaces;
 using SocialMediaAnalysis.BLL.HttpClients.NewsApi.Models.NewsApi;
+using SocialMediaAnalysis.BLL.Services.Interfaces;
 
-namespace SocialMediaAnalysis.BLL.RSS;
+namespace SocialMediaAnalysis.BLL.Services;
 
-public class RssFeedService
+public class RssFeedService: IRssFeedService
 {
     private readonly INewsApiService _newsApiService;
 
@@ -14,7 +15,7 @@ public class RssFeedService
     {
         _newsApiService = newsApiService;
     }
-
+    
     public async Task<byte[]> GetNewsRssFeedAsync(EverythingRequestModel everythingRequestModel)
     {
         var feed = new SyndicationFeed

@@ -32,6 +32,7 @@ public static class ServiceCollectionExtensions
     private static void AddServices(this IServiceCollection services)
     {
         services.AddTransient<INlpService, NlpService>();
+        services.AddTransient<IRssFeedService, RssFeedService>();
     }
 
     private static void AddOptions(this IServiceCollection services)
