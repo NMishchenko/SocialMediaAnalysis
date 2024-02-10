@@ -25,6 +25,11 @@ public class NlpService : INlpService
     
     public async Task<IEnumerable<string>> GetKeyPhrasesAsync(string text)
     {
+        if (text.Length > 125000)
+        {
+            text = text[..125000];
+        }
+        
         return (await _textAnalyticsClient.ExtractKeyPhrasesAsync(text))
             .Value
             .Select(v => v);
@@ -32,6 +37,11 @@ public class NlpService : INlpService
     
     public async Task<SentimentModel> AnalyzeSentimentAsync(string text)
     {
+        if (text.Length > 125000)
+        {
+            text = text[..125000];
+        }
+        
         var result = (await _textAnalyticsClient.AnalyzeSentimentAsync(text)).Value;
 
         return new SentimentModel()
