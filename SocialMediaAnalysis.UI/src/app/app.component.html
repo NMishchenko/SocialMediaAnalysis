@@ -20,7 +20,7 @@
     <div class="standard-block">
       <h1>Trends Chart</h1>
       <app-chart *ngIf="newsResponse && newsResponse.totalResults > 0" [data]="newsResponse.chartData"></app-chart>
-      <div *ngIf="!newsResponse" class="no-diagram">
+      <div *ngIf="!newsResponse || (newsResponse && newsResponse.totalResults == 0)" class="no-diagram">
         <h1 *ngIf="!newsResponse">Please, use search bar to output the diagram</h1>
         <h1 *ngIf="(newsResponse && newsResponse.totalResults == 0)">There are no such news.<br>Try to change the search parameters</h1>
       </div>
