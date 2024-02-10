@@ -13,7 +13,7 @@ public class EverythingRequestModel
     public ICollection<string> ExcludeDomains { get; set; } = new List<string>();
     public DateTime? From { get; set; }
     public DateTime? To { get; set; }
-    public Language? Language { get; set; }
+    public Language? Language { get; set; } = Enums.Language.En;
     public SortBy? SortBy { get; set; }
     public int? PageSize { get; set; }
     public int? Page { get; set; }
