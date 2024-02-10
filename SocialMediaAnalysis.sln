@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialMediaAnalysis.BLL", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialMediaAnalysis.DAL", "SocialMediaAnalysis.DAL\SocialMediaAnalysis.DAL.csproj", "{EC3D1924-4FA4-4947-9E78-000448915170}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialMediaAnalysis.Tests", "SocialMediaAnalysis.Tests\SocialMediaAnalysis.Tests.csproj", "{34EECADF-987E-4B76-B665-EB2DB462F539}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{EC3D1924-4FA4-4947-9E78-000448915170}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC3D1924-4FA4-4947-9E78-000448915170}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC3D1924-4FA4-4947-9E78-000448915170}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34EECADF-987E-4B76-B665-EB2DB462F539}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34EECADF-987E-4B76-B665-EB2DB462F539}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34EECADF-987E-4B76-B665-EB2DB462F539}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34EECADF-987E-4B76-B665-EB2DB462F539}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

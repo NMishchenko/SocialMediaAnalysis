@@ -1,7 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using SocialMediaAnalysis.BLL.HttpClients.NewsApi;
-using SocialMediaAnalysis.BLL.HttpClients.NewsApi.Handlers;
-using SocialMediaAnalysis.BLL.HttpClients.NewsApi.Interfaces;
+﻿using Azure;
+using Azure.AI.TextAnalytics;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using SocialMediaAnalysis.BLL.HttpHandlers;
 using SocialMediaAnalysis.BLL.Options;
 using SocialMediaAnalysis.BLL.Services;
 using SocialMediaAnalysis.BLL.Services.Interfaces;
@@ -10,11 +11,14 @@ namespace SocialMediaAnalysis.BLL.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-    public static void AddBusinessLogicLayerServices(this IServiceCollection services)
+    public static void AddBusinessLogicLayerServices(
+        this IServiceCollection services,
+        IConfiguration configuration)
     {
         services.AddServices();
         services.AddApiClients();
         services.AddOptions();
+        services.AddTextAnalyticsClient(configuration);
     }
 
     private static void AddServices(this IServiceCollection services)
@@ -40,5 +44,20 @@ public static class ServiceCollectionExtensions
     {
         services.ConfigureOptions<NewsApiAuthOptionsSetup>();
         services.ConfigureOptions<ApplicationOptionsSetup>();
+        services.ConfigureOptions<NlpOptions>();
+    }
+
+    private static void AddTextAnalyticsClient(
+        this IServiceCollection services,
+        IConfiguration configuration)
+    {
+        var azureKey = configuration.GetSection("NlpSettings:AzureKey").Value!;
+        var azureEndpoint = configuration.GetSection("NlpSettings:AzureEndpoint").Value!;
+        
+        AzureKeyCredential credentials = new(azureKey);
+        Uri endpoint = new(azureEndpoint);
+        
+        var textAnalyticsClient = new TextAnalyticsClient(endpoint, credentials);
+        services.AddSingleton(_ => textAnalyticsClient);
     }
 }
