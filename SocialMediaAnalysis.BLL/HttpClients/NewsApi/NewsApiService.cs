@@ -21,7 +21,13 @@ public class NewsApiService: INewsApiService
         var response = await MakeGetRequest<ApiResponseModel>("everything", queryString);
         return response;
     }
-    
+
+    public async Task<SourcesResponseModel> GetSourcesAsync()
+    {
+        var response = await MakeGetRequest<SourcesResponseModel>("top-headlines/sources", "language=en");
+        return response;
+    }
+
     private static string GetEverythingQueryString(EverythingRequestModel request)
     {
         var queryParams = new List<string>();
@@ -84,9 +90,10 @@ public class NewsApiService: INewsApiService
         return string.Join("&", queryParams.ToArray());
     }
     
-    private async Task<TResponse> MakeGetRequest<TResponse>(string endpoint, string queryString)
+    private async Task<TResponse> MakeGetRequest<TResponse>(string endpoint, string? queryString = null)
     {
         var requestUri = BaseUri + endpoint;
+
         if (!string.IsNullOrWhiteSpace(queryString))
         {
             requestUri += $"?{queryString}";

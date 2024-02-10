@@ -25,8 +25,6 @@ public class Startup
         {
             options.AddPolicy(FrontOriginPolicyName, policy =>
             {
-                // TODO: Add correct IP address of the Angular application
-                var ip = Configuration.GetValue<string>("Settings:UIIPAddress");
                 policy
                     .AllowAnyHeader()
                     .AllowAnyMethod()

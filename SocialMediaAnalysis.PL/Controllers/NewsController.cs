@@ -16,9 +16,16 @@ public class NewsController: ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> Get([FromQuery] EverythingRequestModel request)
+    public async Task<IActionResult> GetEverything([FromQuery] EverythingRequestModel request)
     {
         var response = await _newsApiService.GetEverythingAsync(request);
+        return Ok(response);
+    }
+
+    [HttpGet("sources")]
+    public async Task<IActionResult> GetSources()
+    {
+        var response = await _newsApiService.GetSourcesAsync();
         return Ok(response);
     }
 }
