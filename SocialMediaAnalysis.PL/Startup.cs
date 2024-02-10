@@ -30,7 +30,7 @@ public class Startup
                 policy
                     .AllowAnyHeader()
                     .AllowAnyMethod()
-                    .WithOrigins(ip);
+                    .AllowAnyOrigin();
             });       
         });
                 
