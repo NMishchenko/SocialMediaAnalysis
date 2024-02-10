@@ -9,14 +9,14 @@
     </div>
     <div *ngIf="sources && sources.sources" class="search-source">
       <h1>Source</h1>
-      <select () name="" id="" selected="everywhere">
+      <select name="" id="" selected="everywhere">
         <option value="everywhere">Everywhere</option>
         <option *ngFor="let source of sources.sources" value="{{source}}">{{source.name}}</option>
       </select>
     </div>
     <div class="standard-block">
       <h1>Trends Chart</h1>
-      <app-chart *ngIf="newsResponse" class="diagram" [x]="MONTHS"></app-chart>
+      <app-chart *ngIf="newsResponse" class="diagram" [data]="newsResponse.chartData"></app-chart>
       <div *ngIf="!newsResponse" class="no-diagram">
         <h1>Please, use search bar to output the diagram</h1>
       </div>
@@ -31,6 +31,7 @@
               <img src="{{article.urlToImage}}" alt="">
               <p>{{article.description}}</p>
             </div>
+            <app-post-analytics [article]="article" style="width: 100%"></app-post-analytics>
             <div class="article-footer">
               <a href="{{article.url}}" target="_blank">{{article.source.name}}</a>
               <div class="article-sign">
@@ -47,6 +48,7 @@
               <img src="{{article.urlToImage}}" alt="">
               <p>{{article.description}}</p>
             </div>
+            <app-post-analytics [article]="article" style="width: 100%"></app-post-analytics>
             <div class="article-footer">
               <a href="{{article.url}}" target="_blank">{{article.source.name}}</a>
               <div class="article-sign">

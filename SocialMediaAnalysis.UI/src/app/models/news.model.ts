@@ -14,4 +14,10 @@ export interface Article {
 export interface NewsResponse {
     totalResults: number,
     articles: Article[]
+    chartData: ChartData[]
+}
+
+export interface ChartData {
+  date: string;
+  totalNumber: number;
 }
