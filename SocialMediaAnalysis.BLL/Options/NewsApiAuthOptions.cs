@@ -4,5 +4,5 @@ public class NewsApiAuthOptions
 {
     public string ApiKey { get; set; }
 
-    public const string SectionName = "NewsApiAuthSettings";
+    public const string SectionName = "NewsApiSettings";
 }

@@ -44,7 +44,7 @@ public static class ServiceCollectionExtensions
     {
         services.ConfigureOptions<NewsApiAuthOptionsSetup>();
         services.ConfigureOptions<ApplicationOptionsSetup>();
-        services.ConfigureOptions<NlpOptions>();
+        services.ConfigureOptions<NlpOptionsSetup>();
     }
 
     private static void AddTextAnalyticsClient(

@@ -2,11 +2,9 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {PlotlyModule} from "angular-plotly.js";
 import {ChartComponent} from "./chart/chart.component";
-import {MONTHS} from "./constants/constants";
 import { Article, NewsResponse } from './models/news.model';
 import { SourcesResponse } from './models/source.model';
 import { NewsService } from './services/news.service';
-import { AnalysisService } from './services/analysis.service';
 import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { saveAs } from 'file-saver';
@@ -22,8 +20,6 @@ import AOS from "aos";
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'SocialMediaAnalysis.UI';
-  protected readonly MONTHS = MONTHS;
   newsResponse!: NewsResponse;
   firstArticles!: Article[];
   secondArticles!: Article[];
@@ -44,6 +40,8 @@ export class AppComponent {
   }
 
   public searchResults(): void {
+    AOS.init();
+    
     if (!this.searchText) return;
     let sourceName = this.selectedSource;
     if (sourceName == "everywhere") sourceName = "";
