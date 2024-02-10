@@ -12,6 +12,7 @@
     <ItemGroup>
         <PackageReference Include="Bogus" Version="35.4.0" />
         <PackageReference Include="FluentAssertions" Version="6.12.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.1" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.0" />
         <PackageReference Include="Moq" Version="4.20.70" />
         <PackageReference Include="NUnit" Version="3.13.3" />
@@ -23,11 +24,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="IntegrationTests" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\SocialMediaAnalysis.BLL\SocialMediaAnalysis.BLL.csproj" />
+      <ProjectReference Include="..\SocialMediaAnalysis.PL\SocialMediaAnalysis.PL.csproj" />
     </ItemGroup>
 
 </Project>
