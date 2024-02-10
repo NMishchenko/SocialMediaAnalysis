@@ -12,9 +12,16 @@ public static class ServiceCollectionExtensions
 {
     public static void AddBusinessLogicLayerServices(this IServiceCollection services)
     {
-        services.AddApiClients();
         services.AddServices();
+        services.AddApiClients();
         services.AddOptions();
+    }
+
+    private static void AddServices(this IServiceCollection services)
+    {
+        services.AddTransient<IAnalysisService, AnalysisService>();
+        services.AddTransient<INlpService, NlpService>();
+        services.AddTransient<IRssFeedService, RssFeedService>();
     }
 
     private static void AddApiClients(this IServiceCollection services)
@@ -28,15 +35,10 @@ public static class ServiceCollectionExtensions
             .AddHttpMessageHandler<ExceptionHttpHandler>()
             .AddHttpMessageHandler<AuthorizationHttpHandler>();
     }
-    
-    private static void AddServices(this IServiceCollection services)
-    {
-        services.AddTransient<INlpService, NlpService>();
-        services.AddTransient<IRssFeedService, RssFeedService>();
-    }
 
     private static void AddOptions(this IServiceCollection services)
     {
         services.ConfigureOptions<NewsApiAuthOptionsSetup>();
+        services.ConfigureOptions<ApplicationOptionsSetup>();
     }
 }
