@@ -9,21 +9,25 @@
     </div>
     <div *ngIf="sources && sources.sources" class="search-source">
       <h1>Source</h1>
-      <select name="" id="" selected="everywhere">
+      <select ngDefaultControl [(ngModel)]="selectedSource" id="">
         <option value="everywhere">Everywhere</option>
-        <option *ngFor="let source of sources.sources" value="{{source}}">{{source.name}}</option>
+        <option *ngFor="let source of sources.sources" [value]="source.id">{{source.name}}</option>
       </select>
+    </div>
+    <div *ngIf="newsResponse && newsResponse.totalResults > 0" class="rss">
+      <button (click)="downloadRss()">Download RSS</button>
     </div>
     <div class="standard-block">
       <h1>Trends Chart</h1>
-      <app-chart *ngIf="newsResponse" class="diagram" [data]="newsResponse.chartData"></app-chart>
+      <app-chart *ngIf="newsResponse && newsResponse.totalResults > 0" [data]="newsResponse.chartData"></app-chart>
       <div *ngIf="!newsResponse" class="no-diagram">
-        <h1>Please, use search bar to output the diagram</h1>
+        <h1 *ngIf="!newsResponse">Please, use search bar to output the diagram</h1>
+        <h1 *ngIf="(newsResponse && newsResponse.totalResults == 0)">There are no such news.<br>Try to change the search parameters</h1>
       </div>
     </div>
     <div class="standard-block">
       <h1 class="news-h1">News</h1>
-      <div *ngIf="newsResponse" class="news-block">
+      <div *ngIf="newsResponse && newsResponse.totalResults > 0" class="news-block">
         <div class="news-column">
           <div *ngFor="let article of firstArticles" class="news-article">
             <div class="article-main">
@@ -59,8 +63,9 @@
           </div>
         </div>
       </div>
-      <div *ngIf="!newsResponse" class="no-news-block">
-        <h1>Please, use search bar to output the news</h1>
+      <div *ngIf="!newsResponse || (newsResponse && newsResponse.totalResults == 0)" class="no-news-block">
+        <h1 *ngIf="!newsResponse">Please, use search bar to output the news</h1>
+        <h1 *ngIf="(newsResponse && newsResponse.totalResults == 0)">There are no such news.<br>Try to change the search parameters</h1>
       </div>
     </div>
   </div>

@@ -16,11 +16,15 @@ export class NewsService {
 
   getNews(text: string, source: string): Observable<NewsResponse> {
     return this.httpClient.get<NewsResponse>(
-      `${this.API_URL}/news?q=${text}&source=${source}`);
+      `${this.API_URL}/news?q=${text}&sources=${source}`);
   }
 
   getSources(): Observable<SourcesResponse> {
     return this.httpClient.get<SourcesResponse>(
       `${this.API_URL}/news/sources`);
+  }
+
+  downloadRss(text: string, source: string) {
+    return this.httpClient.get(`${this.API_URL}/rss?q=${text}&sources=${source}`, { responseType: 'blob' });
   }
 }
