@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace SocialMediaAnalysis.BLL.HttpClients.NewsApi.Handlers;
+namespace SocialMediaAnalysis.BLL.HttpHandlers;
 
 public class ExceptionHttpHandler: DelegatingHandler
 {

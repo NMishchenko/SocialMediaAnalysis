@@ -1,6 +1,4 @@
-﻿using Azure;
-using Azure.AI.TextAnalytics;
-using Microsoft.Extensions.Configuration;
+﻿using Azure.AI.TextAnalytics;
 using SocialMediaAnalysis.BLL.Models.Nlp;
 using SocialMediaAnalysis.BLL.Services.Interfaces;
 
@@ -11,17 +9,9 @@ public class NlpService : INlpService
     private readonly TextAnalyticsClient _textAnalyticsClient;
     private const int CharactersLimit = 5120;
 
-    public NlpService(IConfiguration configuration)
+    public NlpService(TextAnalyticsClient textAnalyticsClient)
     {
-        var azureKey = configuration.GetSection("AzureKey").Value;
-        var azureEndpoint = configuration.GetSection("AzureEndpoint").Value;
-        
-        ArgumentNullException.ThrowIfNull(azureKey);
-        ArgumentNullException.ThrowIfNull(azureEndpoint);
-        
-        AzureKeyCredential credentials = new(azureKey);
-        Uri endpoint = new(azureEndpoint);
-        _textAnalyticsClient = new TextAnalyticsClient(endpoint, credentials);
+        _textAnalyticsClient = textAnalyticsClient;
     }
     
     public async Task<IEnumerable<string>> GetKeyPhrasesAsync(string text)

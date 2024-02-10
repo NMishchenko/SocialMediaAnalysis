@@ -1,6 +1,6 @@
 ﻿using SocialMediaAnalysis.BLL.Enums;
 
-namespace SocialMediaAnalysis.BLL.HttpClients.NewsApi.Models.NewsApi;
+namespace SocialMediaAnalysis.BLL.Models.News;
 
 public class ErrorModel
 {

@@ -12,10 +12,10 @@ public class AnalysisService : IAnalysisService
     {
         _nlpService = nlpService;
     }
-
+    
     public async Task<AnalysisOutputModel> GetAnalysisAsync(AnalysisInputModel analysisInputModel)
     {
-        Article article = Reader.ParseArticle(analysisInputModel.PageUrl);
+        var article = await Reader.ParseArticleAsync(analysisInputModel.PageUrl);
 
         if (!article.IsReadable)
         {

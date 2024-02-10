@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
 using SocialMediaAnalysis.BLL.Options;
 
-namespace SocialMediaAnalysis.BLL.HttpClients.NewsApi.Handlers;
+namespace SocialMediaAnalysis.BLL.HttpHandlers;
 
 public class AuthorizationHttpHandler: DelegatingHandler
 {

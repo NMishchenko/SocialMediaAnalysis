@@ -1,4 +1,4 @@
-﻿namespace SocialMediaAnalysis.BLL.HttpClients.NewsApi.Constants;
+﻿namespace SocialMediaAnalysis.BLL.Constants;
 
 public static class Constants
 {

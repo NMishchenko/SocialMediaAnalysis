@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SocialMediaAnalysis.BLL.HttpClients.NewsApi.Models.NewsApi;
+using SocialMediaAnalysis.BLL.Models.News;
 using SocialMediaAnalysis.BLL.Services.Interfaces;
 
 namespace SocialMediaAnalysis.PL.Controllers;

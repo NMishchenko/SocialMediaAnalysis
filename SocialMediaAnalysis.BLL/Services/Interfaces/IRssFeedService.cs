@@ -1,4 +1,4 @@
-﻿using SocialMediaAnalysis.BLL.HttpClients.NewsApi.Models.NewsApi;
+﻿using SocialMediaAnalysis.BLL.Models.News;
 
 namespace SocialMediaAnalysis.BLL.Services.Interfaces;
 

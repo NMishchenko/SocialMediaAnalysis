@@ -35,7 +35,7 @@ public class Startup
         services.AddEndpointsApiExplorer();
         
         services.AddDataAccessLayerServices(Configuration);
-        services.AddBusinessLogicLayerServices();
+        services.AddBusinessLogicLayerServices(Configuration);
         services.AddPresentationLayer(Configuration);
     }
 

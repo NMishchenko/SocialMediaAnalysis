@@ -2,8 +2,7 @@
 using System.Text;
 using System.Xml;
 using Microsoft.Extensions.Options;
-using SocialMediaAnalysis.BLL.HttpClients.NewsApi.Interfaces;
-using SocialMediaAnalysis.BLL.HttpClients.NewsApi.Models.NewsApi;
+using SocialMediaAnalysis.BLL.Models.News;
 using SocialMediaAnalysis.BLL.Options;
 using SocialMediaAnalysis.BLL.Services.Interfaces;
 

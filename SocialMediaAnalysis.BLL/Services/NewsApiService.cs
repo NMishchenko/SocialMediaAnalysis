@@ -1,9 +1,9 @@
-﻿using SocialMediaAnalysis.BLL.HttpClients.NewsApi.Interfaces;
-using SocialMediaAnalysis.BLL.HttpClients.NewsApi.Models.NewsApi;
-using SocialMediaAnalysis.BLL.Models.Analysis;
+﻿using SocialMediaAnalysis.BLL.Models.Analysis;
+using SocialMediaAnalysis.BLL.Models.News;
+using SocialMediaAnalysis.BLL.Services.Interfaces;
 using SocialMediaAnalysis.BLL.Utility;
 
-namespace SocialMediaAnalysis.BLL.HttpClients.NewsApi;
+namespace SocialMediaAnalysis.BLL.Services;
 
 public class NewsApiService: INewsApiService
 {

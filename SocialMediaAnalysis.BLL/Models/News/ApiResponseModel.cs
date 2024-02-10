@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using SocialMediaAnalysis.BLL.Models.Analysis;
 
-namespace SocialMediaAnalysis.BLL.HttpClients.NewsApi.Models.NewsApi;
+namespace SocialMediaAnalysis.BLL.Models.News;
 
 public class ApiResponseModel
 {
@@ -11,6 +11,6 @@ public class ApiResponseModel
     [JsonProperty("totalResults")]
     public int TotalResults { get; set; }
     
-    [JsonIgnore]
+    [JsonProperty("chartData")]
     public IEnumerable<ChartDataModel> ChartData { get; set; }
 }
