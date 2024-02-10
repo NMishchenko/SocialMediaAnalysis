@@ -21,6 +21,7 @@ public static class ServiceCollectionExtensions
     {
         services.AddTransient<IAnalysisService, AnalysisService>();
         services.AddTransient<INlpService, NlpService>();
+        services.AddTransient<IRssFeedService, RssFeedService>();
     }
 
     private static void AddApiClients(this IServiceCollection services)
@@ -38,5 +39,6 @@ public static class ServiceCollectionExtensions
     private static void AddOptions(this IServiceCollection services)
     {
         services.ConfigureOptions<NewsApiAuthOptionsSetup>();
+        services.ConfigureOptions<ApplicationOptionsSetup>();
     }
 }
