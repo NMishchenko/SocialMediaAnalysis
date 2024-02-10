@@ -10,11 +10,12 @@ import { AnalysisService } from './services/analysis.service';
 import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { saveAs } from 'file-saver';
+import {PostAnalyticsComponent} from "./post-analytics/post-analytics.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, PlotlyModule, ChartComponent, FormsModule],
+  imports: [CommonModule, RouterOutlet, PlotlyModule, ChartComponent, FormsModule, PostAnalyticsComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -29,8 +30,7 @@ export class AppComponent {
   selectedSource: string = "everywhere";
 
   constructor(
-    private newsService: NewsService,
-    private analysisService: AnalysisService
+    private newsService: NewsService
   ) {}
 
   ngOnInit(): void {
@@ -41,7 +41,6 @@ export class AppComponent {
 
   public searchResults(): void {
     if (!this.searchText) return;
-    
     let sourceName = this.selectedSource;
     if (sourceName == "everywhere") sourceName = "";
 

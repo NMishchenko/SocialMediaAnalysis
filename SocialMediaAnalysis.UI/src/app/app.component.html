@@ -19,8 +19,8 @@
     </div>
     <div class="standard-block">
       <h1>Trends Chart</h1>
-      <app-chart *ngIf="newsResponse && newsResponse.totalResults > 0" class="diagram" [x]="MONTHS"></app-chart>
-      <div *ngIf="!newsResponse || (newsResponse && newsResponse.totalResults == 0)" class="no-diagram">
+      <app-chart *ngIf="newsResponse && newsResponse.totalResults > 0" [data]="newsResponse.chartData"></app-chart>
+      <div *ngIf="!newsResponse" class="no-diagram">
         <h1 *ngIf="!newsResponse">Please, use search bar to output the diagram</h1>
         <h1 *ngIf="(newsResponse && newsResponse.totalResults == 0)">There are no such news.<br>Try to change the search parameters</h1>
       </div>
@@ -35,6 +35,7 @@
               <img src="{{article.urlToImage}}" alt="">
               <p>{{article.description}}</p>
             </div>
+            <app-post-analytics [article]="article" style="width: 100%"></app-post-analytics>
             <div class="article-footer">
               <a href="{{article.url}}" target="_blank">{{article.source.name}}</a>
               <div class="article-sign">
@@ -51,6 +52,7 @@
               <img src="{{article.urlToImage}}" alt="">
               <p>{{article.description}}</p>
             </div>
+            <app-post-analytics [article]="article" style="width: 100%"></app-post-analytics>
             <div class="article-footer">
               <a href="{{article.url}}" target="_blank">{{article.source.name}}</a>
               <div class="article-sign">

@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {PlotlySharedModule} from "angular-plotly.js";
+import {Article, ChartData} from "../models/news.model";
 
 @Component({
   selector: 'app-chart',
@@ -11,21 +12,21 @@ import {PlotlySharedModule} from "angular-plotly.js";
   styleUrl: './chart.component.scss'
 })
 export class ChartComponent {
-  @Input()
-  y!: number[];
-  @Input()
-  x!: any[];
+  @Input() data: ChartData[] = [];
   graph: any;
 
-  ngOnInit(): void {
+  ngOnChanges(): void {
     this.initGraph();
   }
 
   initGraph(): void {
+    console.log(this.data);
+    const x = this.data.map((d) => d.date);
+    const y = this.data.map((d) => d.totalNumber);
+
     this.graph = {
       data: [
-        { x: this.x, y: [2, 6, 3, 4, 5, 4, 1, 2], type: 'scatter', marker: {color: 'white'}, line: {width: 5}, name: 'Popularity' },
-        { x: this.x, y: [1, 3, 7, 2, 5, 2, 1, 2], type: 'scatter', marker: {color: '#3f8a7f'}, line: {width: 5}, name: 'Emotion' },
+        { x: x, y, type: 'scatter', marker: {color: 'white'}, line: {width: 5}, name: 'Popularity' },
       ],
       layout: {
         height: 700,
