@@ -9,6 +9,7 @@ namespace SocialMediaAnalysis.BLL.Services;
 public class NlpService : INlpService
 {
     private readonly TextAnalyticsClient _textAnalyticsClient;
+    private const int CharactersLimit = 5120;
 
     public NlpService(IConfiguration configuration)
     {
@@ -25,9 +26,9 @@ public class NlpService : INlpService
     
     public async Task<IEnumerable<string>> GetKeyPhrasesAsync(string text)
     {
-        if (text.Length > 125000)
+        if (text.Length > CharactersLimit)
         {
-            text = text[..125000];
+            text = text[..CharactersLimit];
         }
         
         return (await _textAnalyticsClient.ExtractKeyPhrasesAsync(text))
@@ -37,9 +38,9 @@ public class NlpService : INlpService
     
     public async Task<SentimentModel> AnalyzeSentimentAsync(string text)
     {
-        if (text.Length > 125000)
+        if (text.Length > CharactersLimit)
         {
-            text = text[..125000];
+            text = text[..CharactersLimit];
         }
         
         var result = (await _textAnalyticsClient.AnalyzeSentimentAsync(text)).Value;
