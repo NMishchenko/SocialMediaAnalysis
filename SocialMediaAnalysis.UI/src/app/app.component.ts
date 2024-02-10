@@ -11,6 +11,8 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { saveAs } from 'file-saver';
 import {PostAnalyticsComponent} from "./post-analytics/post-analytics.component";
+import AOS from "aos";
+
 
 @Component({
   selector: 'app-root',
@@ -34,6 +36,8 @@ export class AppComponent {
   ) {}
 
   ngOnInit(): void {
+    AOS.init();
+
     this.newsService.getSources().subscribe(sources => {
       this.sources = sources;
     })
