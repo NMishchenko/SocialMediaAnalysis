@@ -14,13 +14,13 @@ public static class ServiceCollectionExtensions
     {
         services.AddServices();
         services.AddApiClients();
-        services.AddServices();
         services.AddOptions();
     }
 
     private static void AddServices(this IServiceCollection services)
     {
         services.AddTransient<IAnalysisService, AnalysisService>();
+        services.AddTransient<INlpService, NlpService>();
     }
 
     private static void AddApiClients(this IServiceCollection services)
@@ -33,11 +33,6 @@ public static class ServiceCollectionExtensions
             .AddHttpMessageHandler<RetryHttpHandler>()
             .AddHttpMessageHandler<ExceptionHttpHandler>()
             .AddHttpMessageHandler<AuthorizationHttpHandler>();
-    }
-    
-    private static void AddServices(this IServiceCollection services)
-    {
-        services.AddTransient<INlpService, NlpService>();
     }
 
     private static void AddOptions(this IServiceCollection services)

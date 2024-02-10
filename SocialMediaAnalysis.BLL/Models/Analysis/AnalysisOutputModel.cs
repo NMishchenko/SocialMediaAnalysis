@@ -1,8 +1,11 @@
-﻿namespace SocialMediaAnalysis.BLL.Models.Analysis
+﻿using SocialMediaAnalysis.BLL.Models.Nlp;
+
+namespace SocialMediaAnalysis.BLL.Models.Analysis
 {
     public class AnalysisOutputModel
     {
-        // TODO: Add correct output properties
-        public string Content { get; set; }
+        public SentimentModel Sentiment { get; set; }
+
+        public IEnumerable<string> KeyPhrases { get; set; }
     }
 }

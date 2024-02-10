@@ -7,6 +7,12 @@ namespace SocialMediaAnalysis.BLL.Services;
 
 public class AnalysisService : IAnalysisService
 {
+    private readonly INlpService _nlpService;
+    public AnalysisService(INlpService nlpService)
+    {
+        _nlpService = nlpService;
+    }
+
     public async Task<AnalysisOutputModel> GetAnalysisAsync(AnalysisInputModel analysisInputModel)
     {
         Article article = Reader.ParseArticle(analysisInputModel.PageUrl);
@@ -16,8 +22,9 @@ public class AnalysisService : IAnalysisService
             throw new BadRequestException();
         }
 
-        // TODO: Call azure service to process article.
+        var sentiment = await _nlpService.AnalyzeSentimentAsync(article.TextContent);
+        var keyPhrases = await _nlpService.GetKeyPhrasesAsync(article.TextContent);
 
-        return new AnalysisOutputModel() { Content = article.TextContent };
+        return new AnalysisOutputModel() { Sentiment = sentiment, KeyPhrases = keyPhrases.Take(10) };
     }
 }
