@@ -26,7 +26,7 @@ export class ChartComponent {
 
     this.graph = {
       data: [
-        { x: x, y, type: 'scatter', marker: {color: 'white'}, line: {width: 5}, name: 'Popularity' },
+        { x: x, y, type: 'scatter', marker: {color: '#663290'}, line: {width: 5}, name: 'Popularity' },
       ],
       layout: {
         height: 700,
