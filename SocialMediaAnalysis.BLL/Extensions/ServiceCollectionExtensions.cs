@@ -1,36 +1,33 @@
-﻿using AutoMapper;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
+using SocialMediaAnalysis.BLL.HttpClients.NewsApi;
+using SocialMediaAnalysis.BLL.HttpClients.NewsApi.Handlers;
+using SocialMediaAnalysis.BLL.HttpClients.NewsApi.Interfaces;
+using SocialMediaAnalysis.BLL.Options;
 
 namespace SocialMediaAnalysis.BLL.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddBusinessLogicLayerServices(this IServiceCollection services)
+    public static void AddBusinessLogicLayerServices(this IServiceCollection services)
     {
-        AddMapper(services);
-        AddValidators(services);
-        AddServices(services);
-
-        return services;
+        services.AddApiClients();
+        services.AddOptions();
     }
 
-    private static void AddMapper(IServiceCollection services)
+    private static void AddApiClients(this IServiceCollection services)
     {
-        var mappingConfig = new MapperConfiguration(mc =>
-        {
-            // mc.AddProfile(new SomeEntityMappingProfile());
-        });
+        services.AddTransient<RetryHttpHandler>();
+        services.AddTransient<ExceptionHttpHandler>();
+        services.AddTransient<AuthorizationHttpHandler>();
 
-        services.AddSingleton(mappingConfig.CreateMapper());
+        services.AddHttpClient<INewsApiService, NewsApiService>()
+            .AddHttpMessageHandler<RetryHttpHandler>()
+            .AddHttpMessageHandler<ExceptionHttpHandler>()
+            .AddHttpMessageHandler<AuthorizationHttpHandler>();
     }
 
-    private static void AddServices(IServiceCollection services)
+    private static void AddOptions(this IServiceCollection services)
     {
-        // services.AddScoped<ISomeService, SomeService>();
-    }
-
-    private static void AddValidators(IServiceCollection services)
-    {
-        // services.AddScoped<IValidator<SomeModel>, SomeModelValidator>();
+        services.ConfigureOptions<NewsApiAuthOptionsSetup>();
     }
 }
