@@ -4,90 +4,68 @@
   </header>
   <div class="content">
     <div class="search">
-      <input class="search-bar" placeholder="type something to search...">
-      <button class="search-button"><img src="./assets/search.png" alt=""></button>
+      <input ngDefaultControl [(ngModel)]="searchText" class="search-bar" placeholder="type something to search...">
+      <button (click)="searchResults()" class="search-button"><img src="./assets/search.png" alt=""></button>
     </div>
-    <div class="search-source">
+    <div *ngIf="sources && sources.sources" class="search-source">
       <h1>Source</h1>
-      <select name="" id="">
-        <option value="1">Example 1</option>
-        <option value="2">Example 2</option>
-        <option value="3">Example 3</option>
+      <select ngDefaultControl [(ngModel)]="selectedSource" id="">
+        <option value="everywhere">Everywhere</option>
+        <option *ngFor="let source of sources.sources" [value]="source.id">{{source.name}}</option>
       </select>
+    </div>
+    <div *ngIf="newsResponse && newsResponse.totalResults > 0" class="rss">
+      <button (click)="downloadRss()">Download RSS</button>
     </div>
     <div class="standard-block">
       <h1>Trends Chart</h1>
-      <img class="diagram" src="/assets/diag.png" alt="">
+      <app-chart *ngIf="newsResponse && newsResponse.totalResults > 0" [data]="newsResponse.chartData"></app-chart>
+      <div *ngIf="!newsResponse || (newsResponse && newsResponse.totalResults == 0)" class="no-diagram">
+        <h1 *ngIf="!newsResponse">Please, use search bar to output the diagram</h1>
+        <h1 *ngIf="(newsResponse && newsResponse.totalResults == 0)">There are no such news.<br>Try to change the search parameters</h1>
+      </div>
     </div>
     <div class="standard-block">
       <h1 class="news-h1">News</h1>
-      <div class="news-block">
+      <div *ngIf="newsResponse && newsResponse.totalResults > 0" class="news-block">
         <div class="news-column">
-          <div class="news-article">
+          <div *ngFor="let article of firstArticles" class="news-article">
             <div class="article-main">
-              <h1>Честь і відповідальність»: Залужний зробив заяву після звільнення та  отримання звання Героя</h1>
-              <img src="./assets/ex.png" alt="">
-              <p>Валерій Залужний зробив першу заяву після звільнення з посади головнокомандувача Збройних сил та отримання звання Героя України.
-              Залужний наголосив, що «для нього велика честь отримати звання Героя України».</p>
+              <h1>{{article.title}}</h1>
+              <img src="{{article.urlToImage}}" alt="">
+              <p>{{article.description}}</p>
             </div>
+            <app-post-analytics [article]="article" style="width: 100%"></app-post-analytics>
             <div class="article-footer">
-              <a href="https://www.radiosvoboda.org/a/news-zaluzhnyy-zsu-heroy-ukrayiny/32812842.html">Радіо Свобода</a>
+              <a href="{{article.url}}" target="_blank">{{article.source.name}}</a>
               <div class="article-sign">
-                <p>Без автора</p>
-                <p>09 лютого 2024 р. 21:49</p>
-              </div>
-            </div>
-          </div>
-          <div class="news-article">
-            <div class="article-main">
-              <h1>Честь і відповідальність»: Залужний зробив заяву після звільнення та  отримання звання Героя</h1>
-              <img src="./assets/ex.png" alt="">
-              <p>Валерій Залужний зробив першу заяву після звільнення з посади головнокомандувача Збройних сил та отримання звання Героя України.
-              Залужний наголосив, що «для нього велика честь отримати звання Героя України».Валерій Залужний зробив першу заяву після звільнення з посади головнокомандувача Збройних сил та отримання звання Героя України.
-              Залужний наголосив, що «для нього велика честь отримати звання Героя України».</p>
-            </div>
-            <div class="article-footer">
-              <a href="https://www.radiosvoboda.org/a/news-zaluzhnyy-zsu-heroy-ukrayiny/32812842.html">Радіо Свобода</a>
-              <div class="article-sign">
-                <p>Без автора</p>
-                <p>09 лютого 2024 р. 21:49</p>
+                <p>{{article.author}}</p>
+                <p>{{article.publishedAt | date: 'MMM d, y, h:mm a'}}</p>
               </div>
             </div>
           </div>
         </div>
-      <div class="news-column">
-        <div class="news-article">
-          <div class="article-main">
-            <h1>Честь і відповідальність»: Залужний зробив заяву після звільнення та  отримання звання Героя</h1>
-            <img src="./assets/ex.png" alt="">
-            <p>Валерій Залужний зробив першу заяву після звільнення з посади головнокомандувача Збройних сил та отримання звання Героя України.
-            Залужний наголосив, що «для нього велика честь отримати звання Героя України».Валерій Залужний зробив першу заяву після звільнення з посади головнокомандувача Збройних сил та отримання звання Героя України.
-            Залужний наголосив, що «для нього велика честь отримати звання Героя України».Валерій Залужний зробив першу заяву після звільнення з посади головнокомандувача Збройних сил та отримання звання Героя України.
-            Залужний наголосив, що «для нього велика честь отримати звання Героя України».</p>
-          </div>
-          <div class="article-footer">
-            <a href="https://www.radiosvoboda.org/a/news-zaluzhnyy-zsu-heroy-ukrayiny/32812842.html">Радіо Свобода</a>
-            <div class="article-sign">
-              <p>Без автора</p>
-              <p>09 лютого 2024 р. 21:49</p>
+        <div class="news-column">
+          <div *ngFor="let article of secondArticles" class="news-article">
+            <div class="article-main">
+              <h1>{{article.title}}</h1>
+              <img src="{{article.urlToImage}}" alt="">
+              <p>{{article.description}}</p>
+            </div>
+            <app-post-analytics [article]="article" style="width: 100%"></app-post-analytics>
+            <div class="article-footer">
+              <a href="{{article.url}}" target="_blank">{{article.source.name}}</a>
+              <div class="article-sign">
+                <p>{{article.author}}</p>
+                <p>{{article.publishedAt | date: 'MMM d, y, h:mm a'}}</p>
+              </div>
             </div>
           </div>
         </div>
-        <div class="news-article">
-          <div class="article-main">
-            <h1>Честь і відповідальність»: Залужний зробив заяву після звільнення та  отримання звання Героя</h1>
-            <img src="./assets/ex.png" alt="">
-            <p>Валерій Залужний зробив першу заяву після звільнення з посади головнокомандувача Збройних сил та отримання звання Героя України.
-            Залужний наголосив, що «для нього велика честь отримати звання Героя України».</p>
-          </div>
-          <div class="article-footer">
-            <a href="https://www.radiosvoboda.org/a/news-zaluzhnyy-zsu-heroy-ukrayiny/32812842.html">Радіо Свобода</a>
-            <div class="article-sign">
-              <p>Без автора</p>
-              <p>09 лютого 2024 р. 21:49</p>
-            </div>
-          </div>
-        </div>
+      </div>
+      <div *ngIf="!newsResponse || (newsResponse && newsResponse.totalResults == 0)" class="no-news-block">
+        <h1 *ngIf="!newsResponse">Please, use search bar to output the news</h1>
+        <h1 *ngIf="(newsResponse && newsResponse.totalResults == 0)">There are no such news.<br>Try to change the search parameters</h1>
       </div>
     </div>
   </div>

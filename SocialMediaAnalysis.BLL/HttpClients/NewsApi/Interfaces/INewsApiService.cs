@@ -1,6 +1,6 @@
 ﻿using SocialMediaAnalysis.BLL.Models.News;
 
-namespace SocialMediaAnalysis.BLL.Services.Interfaces;
+namespace SocialMediaAnalysis.BLL.HttpClients.NewsApi.Interfaces;
 
 public interface INewsApiService
 {

@@ -1,0 +1,10 @@
+<div class="wrapper">
+  <button class="button" [ngClass]="{'hidden': clicked}" (click)="handleClick()">Analyze</button>
+  <p [ngClass]="{'hidden': !loading}">Loading...</p>
+  <div class="data-wrapper" [ngClass]="{'hidden': !clicked || loading}">
+    <h3>Text analytics</h3>
+    <p>Key phrases: {{keyPhrases.join(', ')}}</p>
+    <p>Sentiment: <strong [style.color]="TextSentimentColorResolver.textSentiment[sentiment]">{{TextSentiment[sentiment]}}</strong></p>
+  </div>
+</div>
+

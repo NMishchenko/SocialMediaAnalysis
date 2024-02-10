@@ -21,19 +21,28 @@ public class NewsApiService: INewsApiService
         var queryString = GetEverythingQueryString(request);
         var response = await MakeGetRequest<ApiResponseModel>("everything", queryString);
         
-        response.ChartData = response.Articles
-            .Where(r => r.PublishedAt is { Year: > 2000 })
-            .GroupBy(r => r.PublishedAt.Value.Date)
-            .Select(g => new ChartDataModel()
+        response.ChartData = Enumerable.Range(1, 30)
+            .Select(day =>
             {
-                Date = g.Key,
-                TotalNumber = g.Count()
+                var date = DateTime.Now.Date.AddDays(-day);
+                return new ChartDataModel()
+                {
+                    Date = date,
+                    TotalNumber = response.Articles
+                        .Count(a => a.PublishedAt.HasValue && a.PublishedAt.Value.Date == date)
+                };
             })
             .OrderBy(c => c.Date);
         
         return response;
     }
-    
+
+    public async Task<SourcesResponseModel> GetSourcesAsync()
+    {
+        var response = await MakeGetRequest<SourcesResponseModel>("top-headlines/sources", "language=en");
+        return response;
+    }
+
     private static string GetEverythingQueryString(EverythingRequestModel request)
     {
         var queryParams = new List<string>();
@@ -96,9 +105,10 @@ public class NewsApiService: INewsApiService
         return string.Join("&", queryParams.ToArray());
     }
     
-    private async Task<TResponse> MakeGetRequest<TResponse>(string endpoint, string queryString)
+    private async Task<TResponse> MakeGetRequest<TResponse>(string endpoint, string? queryString = null)
     {
         var requestUri = BaseUri + endpoint;
+
         if (!string.IsNullOrWhiteSpace(queryString))
         {
             requestUri += $"?{queryString}";
