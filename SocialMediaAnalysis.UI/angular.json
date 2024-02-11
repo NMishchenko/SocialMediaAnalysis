@@ -31,7 +31,8 @@
             ],
             "styles": [
               "src/styles.scss",
-              "node_modules/aos/dist/aos.css"
+              "node_modules/aos/dist/aos.css",
+              "node_modules/ngx-spinner/animations/ball-spin-clockwise.css"
             ],
             "scripts": []
           },

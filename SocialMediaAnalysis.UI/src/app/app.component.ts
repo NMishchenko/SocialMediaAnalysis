@@ -10,12 +10,14 @@ import { FormsModule } from '@angular/forms';
 import { saveAs } from 'file-saver';
 import {PostAnalyticsComponent} from "./post-analytics/post-analytics.component";
 import AOS from "aos";
+import { finalize } from 'rxjs';
+import { NgxSpinnerModule, NgxSpinnerService } from "ngx-spinner";
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, PlotlyModule, ChartComponent, FormsModule, PostAnalyticsComponent],
+  imports: [CommonModule, RouterOutlet, PlotlyModule, ChartComponent, FormsModule, PostAnalyticsComponent, NgxSpinnerModule ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -28,7 +30,8 @@ export class AppComponent {
   selectedSource: string = "everywhere";
 
   constructor(
-    private newsService: NewsService
+    private newsService: NewsService,
+    private ngxSpinnerService: NgxSpinnerService
   ) {}
 
   ngOnInit(): void {
@@ -40,13 +43,14 @@ export class AppComponent {
   }
 
   public searchResults(): void {
+    this.ngxSpinnerService.show();
     AOS.init();
-    
+
     if (!this.searchText) return;
     let sourceName = this.selectedSource;
     if (sourceName == "everywhere") sourceName = "";
 
-    this.newsService.getNews(this.searchText, sourceName).subscribe(news => {
+    this.newsService.getNews(this.searchText, sourceName).pipe(finalize(() => this.ngxSpinnerService.hide())).subscribe(news => {
       news.articles = news.articles.filter((v) => v.description && v.description != "[Removed]");
       this.newsResponse = news;
       if (news && news.articles) {

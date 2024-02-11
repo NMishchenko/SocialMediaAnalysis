@@ -21,6 +21,7 @@
     "angular-plotly.js": "^5.2.2",
     "aos": "^2.3.4",
     "file-saver": "^2.0.5",
+    "ngx-spinner": "^16.0.2",
     "plotly.js-dist-min": "^2.29.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

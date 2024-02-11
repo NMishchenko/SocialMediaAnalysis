@@ -1,3 +1,13 @@
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "large" color = "#fff" [fullScreen] = "true"><div class="la-ball-spin-clockwise" style="transform: scale(2.5); margin-top: -170px;">
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+</div></ngx-spinner>
 <div class="body">
   <header>
     <h1 class="website-title">ModernMedia Analyzer</h1>
@@ -22,7 +32,7 @@
       <app-chart *ngIf="newsResponse && newsResponse.totalResults > 0" [data]="newsResponse.chartData" class="diagram" data-aos="zoom-in" data-aos-duration="1000"></app-chart>
       <div *ngIf="!newsResponse || (newsResponse && newsResponse.totalResults == 0)" class="no-diagram" data-aos="zoom-in" data-aos-duration="1000">
         <h1 *ngIf="!newsResponse">Please, use search bar to output the diagram</h1>
-        <h1 *ngIf="(newsResponse && newsResponse.totalResults == 0)">There are no such news.<br>Try to change the search parameters</h1>
+        <h1 *ngIf="(newsResponse && newsResponse.totalResults == 0)">There is no such news.<br>Try to change the search parameters</h1>
       </div>
     </div>
     <div class="standard-block">
@@ -65,8 +75,11 @@
       </div>
       <div *ngIf="!newsResponse || (newsResponse && newsResponse.totalResults == 0)" class="no-news-block" data-aos="zoom-in">
         <h1 *ngIf="!newsResponse">Please, use search bar to output the news</h1>
-        <h1 *ngIf="(newsResponse && newsResponse.totalResults == 0)">There are no such news.<br>Try to change the search parameters</h1>
+        <h1 *ngIf="(newsResponse && newsResponse.totalResults == 0)">There is no such news.<br>Try to change the search parameters</h1>
       </div>
     </div>
   </div>
+  <footer>
+    <p>IASA Champ 24 | Modern Crusaders 2024</p>
+  </footer>
 </div>
