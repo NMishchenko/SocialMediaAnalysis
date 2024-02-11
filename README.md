@@ -1,6 +1,6 @@
 # Social Media Analyzer by Modern Crusaders
 
-Social Media Analyzer is a web application that allows users to search for news articles based on keywords, retrieve information from various sources via an external API, and analyze the sentiment and keyphrases of each article using Azure Cognitive Services. Additionally, users can visualize trends in news coverage over time through a dynamic chart displayed on the web page.
+Social Media Analyzer is a web application that allows users to search for news articles based on keywords, retrieve information from various sources via an external API, and analyze the sentiment and keyphrases of each article using Azure Cognitive Services. Additionally, users can visualize trends in news coverage over time through a dynamic chart displayed on the web page. There is also capability to fetch RSS feeds from the articles retrieved.
 
 ## Run localy
 1. Clone the repository:
@@ -28,6 +28,9 @@ Upon selecting an article, users can view detailed information including keyphra
 
 ### Trends Chart
 The application provides a trends chart that visualizes the count of news articles for each day, allowing users to track the popularity of specific topics over time.
+
+### RSS Feed Integration
+Users can access RSS feeds from the retrieved articles, enabling them to stay updated with the latest news content.
 
 ## Technologies Used
 - ASP .NET Core for backend API development
