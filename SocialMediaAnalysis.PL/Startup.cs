@@ -25,31 +25,25 @@ public class Startup
         {
             options.AddPolicy(FrontOriginPolicyName, policy =>
             {
-                // TODO: Add correct IP address of the Angular application
-                var ip = Configuration.GetValue<string>("Settings:UIIPAddress");
                 policy
                     .AllowAnyHeader()
                     .AllowAnyMethod()
-                    .WithOrigins(ip);
+                    .AllowAnyOrigin();
             });       
         });
                 
         services.AddEndpointsApiExplorer();
         
         services.AddDataAccessLayerServices(Configuration);
-        services.AddBusinessLogicLayerServices();
+        services.AddBusinessLogicLayerServices(Configuration);
         services.AddPresentationLayer(Configuration);
     }
 
     public void Configure(WebApplication app, IWebHostEnvironment env)
     {
         app.UseCors(FrontOriginPolicyName);
-        
-        if (env.IsDevelopment())
-        {
-            app.UseSwagger();
-            app.UseSwaggerUI();
-        }
+        app.UseSwagger();
+        app.UseSwaggerUI();
 
         app.UseMiddleware<ExceptionHandlerMiddleware>();
 

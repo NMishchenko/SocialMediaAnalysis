@@ -1,1 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
+* {
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: none;
+    text-decoration: none;
+    min-width: 0;
+    font-family: Montserrat, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif;
+    font-weight: 500;
+}
+
+body {
+  width: 100%;
+
+  background-image: linear-gradient(180deg, #6C3597ff 0%, #662FDAff 100%);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
